@@ -9,6 +9,7 @@ import { Misdemeanours } from "./pages/Misdemeanours";
 import { ConfessToUs } from "./pages/ConfessToUs";
 import { Home } from "./pages/Home";
 import { NoMatch } from "./pages/404";
+import { Footer } from "./components/Footer";
 
 import "./App.css";
 
@@ -59,6 +60,7 @@ function Layout() {
       </nav>
       <div className="outlet">
         <Outlet />
+        <Footer />
       </div>
     </>
   );
