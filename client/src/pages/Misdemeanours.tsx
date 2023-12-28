@@ -61,9 +61,26 @@ function misdemeanourRow(misdemeanours: Misdemeanour) {
     >
       <td data-testid="citizenId">{misdemeanours.citizenId}</td>
       <td data-testid="date">{misdemeanours.date}</td>
-      <td data-testid="misdemeanour-emoji"></td>
+      <td data-testid="misdemeanour-emoji">
+        {applyEmoji(misdemeanours.misdemeanour)}
+      </td>
       <td></td>
       <td data-testid="details">{misdemeanours.details}</td>
     </tr>
   );
+}
+
+export function applyEmoji(misdemeanour: MisdemeanourKind) {
+  switch (misdemeanour) {
+    case "rudeness":
+      return `${misdemeanour}🤪`;
+    case "lift":
+      return `${misdemeanour}🗣`;
+    case "vegetables":
+      return `${misdemeanour}🥗`;
+    case "united":
+      return `${misdemeanour}😈`;
+    default:
+      return misdemeanour;
+  }
 }
