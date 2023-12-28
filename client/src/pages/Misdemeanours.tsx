@@ -4,6 +4,7 @@ import {
   Misdemeanour,
   MisdemeanourKind,
 } from "../types/misdemeanours.types";
+import { Dropdown } from "../components/Dropdown/Dropdown";
 //import "./Misdemeanours.css";
 import { MisdemeanoursContext } from "../App";
 
@@ -20,14 +21,23 @@ export function Misdemeanours() {
 
 function MisdemeanourTable() {
   const { misdemeanours } = useContext(MisdemeanoursContext);
-  const [selection] = useState<MisdemeanourKind>(MISDEMEANOURS[0]);
+  const [selection, setSelection] = useState<MisdemeanourKind>(
+    MISDEMEANOURS[0]
+  );
   return (
     <table>
       <thead>
         <tr>
           <th>Citizen ID</th>
           <th>Date</th>
-          <th>Misdemeanour</th>
+          <th>
+            Misdemeanour
+            <Dropdown
+              onChange={(v) => setSelection(v as any)}
+              value={selection}
+              options={MISDEMEANOURS as any}
+            />
+          </th>
           <th>Punishment Idea</th>
           <th>Details</th>
         </tr>

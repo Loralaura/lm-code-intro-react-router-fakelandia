@@ -10,7 +10,7 @@ import { Misdemeanour } from "./types/misdemeanours.types";
 import { ConfessToUs } from "./pages/ConfessToUs";
 import { Home } from "./pages/Home";
 import { NoMatch } from "./pages/404";
-import { Footer } from "./components/Footer";
+import { Footer } from "./components/Footer/Footer";
 import axios from "axios";
 
 import "./App.css";
