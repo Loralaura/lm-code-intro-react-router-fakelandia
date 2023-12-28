@@ -5,7 +5,7 @@ import {
   MisdemeanourKind,
 } from "../types/misdemeanours.types";
 import { Dropdown } from "../components/Dropdown/Dropdown";
-//import "./Misdemeanours.css";
+import "./Misdemeanours.css";
 import { MisdemeanoursContext } from "../App";
 
 export function Misdemeanours() {
@@ -64,7 +64,13 @@ function misdemeanourRow(misdemeanours: Misdemeanour) {
       <td data-testid="misdemeanour-emoji">
         {applyEmoji(misdemeanours.misdemeanour)}
       </td>
-      <td></td>
+      <td>
+        <img
+          data-testid="punishment-idea"
+          src={`https://picsum.photos/100/100/?random=${misdemeanours.citizenId}`}
+          alt=""
+        />
+      </td>
       <td data-testid="details">{misdemeanours.details}</td>
     </tr>
   );
