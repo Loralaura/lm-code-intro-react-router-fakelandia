@@ -6,6 +6,9 @@ export const MISDEMEANOURS = [
 ] as const;
 export type MisdemeanourKind = (typeof MISDEMEANOURS)[number];
 
+export const JUST_TALK = "just-talk";
+export type JustTalk = typeof JUST_TALK;
+
 export type Misdemeanour = {
   citizenId: number;
   misdemeanour: MisdemeanourKind;

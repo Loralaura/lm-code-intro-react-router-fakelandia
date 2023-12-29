@@ -1,0 +1,24 @@
+.confess-to-us {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  .form {
+    display: flex;
+    flex-flow: column;
+    align-self: center;
+    row-gap: 5px;
+    overflow: auto;
+
+    .row {
+      display: flex;
+      column-gap: 5px;
+    }
+
+    textarea {
+      width: 500px;
+      height: 300px;
+      min-width: 500px;
+      min-height: 300px;
+    }
+  }
+}
