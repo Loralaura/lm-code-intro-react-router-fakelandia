@@ -12,7 +12,7 @@ import {
 } from "../types/request.types";
 
 const OPTIONS: Option[] = REASONS.map((x) => {
-  if (x === "just-talk") return { value: x, label: " just want to talk" };
+  if (x === "just-talk") return { value: x, label: "I just want to talk" };
   return { value: x, label: x };
 });
 
@@ -22,6 +22,14 @@ export function ConfessToUs() {
   const [subject, setSubject] = useState("");
   const [details, setDetails] = useState("");
   const [response, setResponse] = useState<ConfessResponse>();
+
+  const canConfess = useMemo(() => {
+    if (!reason || reason.trim() === "") return true;
+    if (!subject || subject.trim() === "") return true;
+    if (!details || details.trim() === "") return true;
+
+    return false;
+  }, [reason, details, subject]);
 
   const onSubmit = useCallback(() => {
     async function submit() {
@@ -66,7 +74,7 @@ export function ConfessToUs() {
   }, [reason, subject, details]);
 
   return (
-    <div className="confess-to-us">
+    <div className="confess-to-us" data-testid="confess-to-us">
       <p>
         It's very difficult to catch people committing misdemeanours so we
         appreciate it when citizens confess to us directly.
@@ -75,36 +83,61 @@ export function ConfessToUs() {
         However, if you're just having a hard day and need to vent then you're
         welcome to contact us here too. Up to you!
       </p>
-
       <div className="form">
         <div className="row">
           <label htmlFor="subject">Subject:</label>
           <input
+            className={validation(subject) ? "valid" : "invalid"}
             id="subject"
             type="text"
             value={subject}
+            placeholder="Provide a subject..."
             onChange={(v) => setSubject(v.currentTarget.value)}
+            data-testid="subject"
           />
+          {!validation(subject) && (
+            <label className="invalidMessage" data-testid="subject-error">
+              Subject is required
+            </label>
+          )}
         </div>
         <div className="row">
-          <label htmlFor="subject">Reason for contact:</label>
+          <label htmlFor="reason">Reason for contact:</label>
           <Dropdown
-            id="subject"
+            id="reason"
             onChange={(v) => setReason(v as Reason)}
             value={reason}
             options={OPTIONS}
+            data-testid="reason"
           />
         </div>
-        <textarea
-          value={details}
-          onChange={(v) => setDetails(v.currentTarget.value)}
-        />
-        <button onClick={onSubmit}>Confess</button>
-        {response?.success === false && (
-          <div>Confess Failed: {response?.message}</div>
+        <label>Detail:</label>
+        {!validation(details) && (
+          <label className="invalidMessage" data-testid="details-error">
+            Details is required
+          </label>
         )}
-        {response?.success === true && <div>Confess Success</div>}
+        <textarea
+          className={validation(details) ? "valid" : "invalid"}
+          value={details}
+          placeholder="Provide some details..."
+          onChange={(v) => setDetails(v.currentTarget.value)}
+          data-testid="details"
+        />
+        <button disabled={canConfess} onClick={onSubmit} data-testid="confess">
+          Confess
+        </button>
+        {response?.success === false && (
+          <div data-testid="failed">Confess Failed: {response?.message}</div>
+        )}
+        {response?.success === true && (
+          <div data-testid="success">Confess Success</div>
+        )}
       </div>
     </div>
   );
+}
+
+function validation(value: string) {
+  return value !== undefined && value.trim() !== "";
 }
