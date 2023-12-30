@@ -1,53 +1,23 @@
-import React, { createContext, useEffect, useMemo, useState } from "react";
 import {
   Outlet,
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
   NavLink,
 } from "react-router-dom";
-import { Misdemeanours } from "./pages/Misdemeanours";
+import React, { createContext, useEffect, useMemo, useState } from "react";
+import "./App.css";
+import { Footer } from "./components/Footer/Footer";
 import { Misdemeanour } from "./types/misdemeanours.types";
+import { Misdemeanours } from "./pages/Misdemeanours";
+import { NoMatch } from "./pages/404";
 import { ConfessToUs } from "./pages/ConfessToUs";
 import { Home } from "./pages/Home";
-import { NoMatch } from "./pages/404";
-import { Footer } from "./components/Footer/Footer";
 import axios from "axios";
-
-import "./App.css";
 
 type ContextProps = {
   misdemeanours: Misdemeanour[];
   setMisdemeanours: (misdemeanours: Misdemeanour[]) => void;
 };
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "misdemeanours",
-        element: <Misdemeanours />,
-      },
-      {
-        path: "confess-to-us",
-        element: <ConfessToUs />,
-      },
-      {
-        path: "*",
-        element: <NoMatch />,
-      },
-    ],
-  },
-]);
-
-export default function App() {
-  return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
-}
 
 function Layout() {
   const [misdemeanours, setMisdemeanours] = useState<Misdemeanour[]>([]);
@@ -104,3 +74,33 @@ export const MisdemeanoursContext = createContext<ContextProps>({
   misdemeanours: [],
   setMisdemeanours: () => {},
 });
+export const routersConfig = [
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "misdemeanours",
+        element: <Misdemeanours />,
+      },
+      {
+        path: "confess-to-us",
+        element: <ConfessToUs />,
+      },
+      {
+        path: "*",
+        element: <NoMatch />,
+      },
+    ],
+  },
+];
+
+const router = createHashRouter(routersConfig);
+
+export default function App() {
+  return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
+}
