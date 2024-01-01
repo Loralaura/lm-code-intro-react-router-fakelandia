@@ -1,11 +1,20 @@
+:root {
+  --aqua: #15b38b;
+  --teal: #0f7173;
+  --light: #e7ecef;
+  --dark: #272932;
+  --seagrass: #048686;
+}
+
 nav {
-  height: 50px;
+  height: 100px;
+  padding-left: 110px;
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: var(--teal);
   }
 
   li {
@@ -14,18 +23,18 @@ nav {
 
   li a {
     display: block;
-    color: white;
+    color: var(--light);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
   }
 
   li a:hover:not(.active) {
-    background-color: #111;
+    background-color: var(--aqua);
   }
 
   .active {
-    background-color: #04aa6d;
+    background-color: var(--seagrass);
   }
 }
 
@@ -34,4 +43,12 @@ nav {
   height: calc(100% - 110px);
   display: flex;
   flex-flow: column;
+}
+
+.logo {
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  top: 10px;
+  left: 5px;
 }

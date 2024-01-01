@@ -22,3 +22,18 @@
     }
   }
 }
+
+.invalidMessage {
+  color: red;
+  background-color: bisque;
+}
+
+.successMessage {
+  color: green;
+  background-color: palegreen;
+}
+
+.failMessage {
+  color: red;
+  background-color: bisque;
+}

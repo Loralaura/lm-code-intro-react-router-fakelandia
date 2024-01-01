@@ -48,6 +48,13 @@ function Layout() {
   return (
     <>
       <nav>
+        <a href="#/">
+          <img
+            className="logo"
+            src="https://img.freepik.com/premium-vector/attorney-law-service-justice-logo-design_779965-8.jpg?size=300"
+            alt="Fakelandia Justice Department logo"
+          />
+        </a>
         <ul>
           <li>
             <NavLink to="/">Home</NavLink>

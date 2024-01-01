@@ -128,10 +128,14 @@ export function ConfessToUs() {
           Confess
         </button>
         {response?.success === false && (
-          <div data-testid="failed">Confess Failed: {response?.message}</div>
+          <div className="failMessage" data-testid="failed">
+            Confess Failed: {response?.message}
+          </div>
         )}
         {response?.success === true && (
-          <div data-testid="success">Confess Success</div>
+          <div className="successMessage" data-testid="success">
+            Confession Success
+          </div>
         )}
       </div>
     </div>
